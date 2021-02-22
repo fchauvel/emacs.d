@@ -9,14 +9,12 @@
 ;; Theme: Set colors for font-lock mode,
 
 
-(use-package flatui-theme
+(use-package kaolin-themes
   :ensure t
-  :init(load-theme 'flatui t))
+  :init(load-theme 'kaolin-breeze t))
 
 (use-package beacon
   :config
-  (setq beacon-push-mark 35)
-  (setq beacon-color "#eeeeeee")
   (beacon-mode t)
   )
 

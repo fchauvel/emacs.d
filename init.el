@@ -29,25 +29,13 @@
              (whitespace-mode)))
 
 
-;; White space cleanup on save / in prog
-mode
+;; White space cleanup on save / in prog-mode
 (add-hook 'before-save-hook
            (lambda ()
              (unless indent-tabs-mode
                (untabify (point-min) (point-max)))
              (when (derived-mode-p 'prog-mode)
                (whitespace-cleanup))))
-
-
-;; Auto-completion
-(use-package company
-  :ensure t
-  :bind (:map company-active-map ("<tab>" . compagny-complete-common-or-cycle))
-  :custom
-  (company-idle-delay 0.0 "Recommended by lsp")
-  :hook (prog-mode-hook . company-mode))
-
-
 
 ;; Indentation as you type
 (use-package aggressive-indent
@@ -60,6 +48,23 @@ mode
 
 ;; LaTeX
 (load-file "~/.emacs.d/latex.el")
+
+;; Python
+(load-file "~/.emacs.d/python.el")
+
+;; Dart & Flutter
+(load-file "~/.emacs.d/flutter.el")
+
+
+
+;; Auto-completion
+(use-package company
+  :ensure t
+  :custom
+  (company-idle-delay 0.0 "Recommended by lsp")
+  :init (global-company-mode 1))
+
+
 
 ;; YAML
 (use-package yaml-mode
@@ -109,7 +114,7 @@ mode
  '(custom-safe-themes
    '("039c01abb72985a21f4423dd480ddb998c57d665687786abd4e16c71128ef6ad" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default))
  '(package-selected-packages
-   '(rainbow-mode rainbow-blocks rainbow-block leuven-theme molokai-theme beacon flycheck flyspell aggressive-indent company-reftex company-bibtex company-auctex auto-dictionary auctex LaTeX indent-guide rainbow-delimiters lsp-python-ms lsp-ui lsp-treemacs lsp-dart dart-mode csv-mode yaml-mode typescript-mode ssh-agency markdown-mode magit helm)))
+   '(rainbow-mode rainbow-blocks rainbow-block leuven-theme molokai-theme beacon flycheck flyspell aggressive-indent company-reftex company-bibtex company-auctex auto-dictionary auctex LaTeX indent-guide rainbow-delimiters lsp-python-ms lsp-ui lsp-treemacs lsp-dart dart-mode csv-mode yaml-mode typescript-mode ssh-agency markdown-mode magit)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
