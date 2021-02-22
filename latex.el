@@ -1,23 +1,50 @@
 ;; Configuration for LaTeX editing
 
+
+(use-package tex-site
+  :ensure auctex
+  :mode ("\\.tex\\'" . LaTeX-mode))
+
+
+(use-package reftex
+  :defer t
+  :config
+  (setq reftex-default-bibliography "./references.bib")
+  :commands turn-on-reftex)
+
+
 (use-package auctex
   :ensure t
-  :mode "\\.(la)?tex\\'"
-  )
+  :config
+  (setq TeX-master nil)
+  (setq reftex-plug-into-AUCTeX t)
+  :hook (LaTeX-mode-hook . 'turn-on-reftex))
 
-(use-package company-auctex
-  :ensure t
-  :init (company-auctex-init)
-  :after (auctex company))
 
+(use-package math-symbol-lists
+  :ensure t)
 
 (use-package company-math
-  :ensure t)
+  :ensure t
+  :config
+  (add-to-list 'company-backends 'company-math-symbols-unicode)
+  (add-to-list 'company-backends 'company-math-symbols-latex))
+
 
 (use-package company-bibtex
   :ensure t
-  :demand t)
+  :after
+  (add-to-list 'company-backends 'company-bibtex))
+
 
 (use-package company-reftex
   :ensure t
-  :demand t)
+  :init
+  (setq company-bibtex-bibliography "./references.bib")
+  (add-to-list 'company-backends 'company-reftex-labels)
+  (add-to-list 'company-backends 'company-reftex-citations))
+
+
+(use-package company-auctex
+  :ensure t
+  :config (company-auctex-init))
