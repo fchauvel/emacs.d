@@ -55,6 +55,14 @@
 
 
 ;; Magit
+(use-package ssh-agency
+  :ensure t
+  :config
+  (unless (file-exists-p "~/.ssh/id_rsa.pub")
+    (remove-hook 'magit-credential-hook 'ssh-agency-ensure))
+  (setenv "SSH_ASKPASS" "git-gui--askpass"))
+
+
 (use-package magit
   :ensure t)
 
