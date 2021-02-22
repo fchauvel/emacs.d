@@ -10,8 +10,17 @@
    (package-install 'use-package)
    (require 'use-package)))
 
+
+;; Disable the bell
+(setq ring-bell-function 'ignore)
+
 ;; Highlight current line mode globally
 (global-hl-line-mode 1)
+
+;; Theme
+(use-package spacemacs-theme
+  :ensure t
+  :after (load-theme 'spacemacs-light t))
 
 ;; Whitespace in programming
 (require 'whitespace)
@@ -26,14 +35,21 @@
 	      (whitespace-cleanup))))
 
 
-;; Auto-complete
-(use-package company :ensure t)
+;; Auto-completion
+(use-package company
+  :ensure t
+  :init
+  (global-company-mode))
 
 ;; Rainbow delimiters
 (use-package rainbow-delimiters
   :ensure t
   :init
   :hook (prog-mode . rainbow-delimiters-mode))
+
+;; Indentation as you type
+(use-package aggressive-indent
+  :hook (prog-mode . aggressive-indent-mode))
 
 ;; Indent guide
 (use-package indent-guide
@@ -47,19 +63,9 @@
 (use-package magit
   :ensure t)
 
+
 ;; LaTeX
-(use-package auctex
-  :ensure t
-  :mode "\\.(la)?tex\\'")
-
-(use-package auto-dictionary
-  :ensure t
-  :hook (flyspell-mode-hook .
-			    (lambda () (auto-dictionary-mode 1))))
-
-(use-package company-auctex
-  :ensure t
-  :init (company-auctex-init))
+(load-file "~/.emacs.d/latex.el")
 
 ;; YAML
 (use-package yaml-mode
@@ -98,7 +104,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(company-auctex auto-dictionary auctex LaTeX indent-guide rainbow-delimiters lsp-python-ms lsp-ui lsp-treemacs lsp-dart dart-mode csv-mode yaml-mode typescript-mode ssh-agency markdown-mode magit helm)))
+   '(company-reftex company-bibtex company-auctex auto-dictionary auctex LaTeX indent-guide rainbow-delimiters lsp-python-ms lsp-ui lsp-treemacs lsp-dart dart-mode csv-mode yaml-mode typescript-mode ssh-agency markdown-mode magit helm)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
