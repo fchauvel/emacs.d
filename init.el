@@ -25,17 +25,18 @@
 ;; Whitespace in programming
 (require 'whitespace)
 (add-hook 'prog-mode-hook
-          (lambda ()
-            (whitespace-mode)))
+           (lambda ()
+             (whitespace-mode)))
 
 
-;; White space cleanup on save / in prog  mode
+;; White space cleanup on save / in prog
+mode
 (add-hook 'before-save-hook
-          (lambda ()
-            (unless indent-tabs-mode
-              (untabify (point-min) (point-max)))
-            (when (derived-mode-p 'prog-mode)
-              (whitespace-cleanup))))
+           (lambda ()
+             (unless indent-tabs-mode
+               (untabify (point-min) (point-max)))
+             (when (derived-mode-p 'prog-mode)
+               (whitespace-cleanup))))
 
 
 ;; Auto-completion
@@ -44,8 +45,8 @@
   :bind (:map company-active-map ("<tab>" . compagny-complete-common-or-cycle))
   :custom
   (company-idle-delay 0.0 "Recommended by lsp")
-  :after
-  (global-company-mode))
+  :hook (prog-mode-hook . company-mode))
+
 
 
 ;; Indentation as you type
@@ -54,18 +55,8 @@
   :hook (prog-mode . aggressive-indent-mode))
 
 
-;; Magit
-(use-package ssh-agency
-  :ensure t
-  :config
-  (unless (file-exists-p "~/.ssh/id_rsa.pub")
-    (remove-hook 'magit-credential-hook 'ssh-agency-ensure))
-  (setenv "SSH_ASKPASS" "git-gui--askpass"))
-
-
-(use-package magit
-  :ensure t)
-
+;; Git
+(load-file "~/.emacs.d/git.el")
 
 ;; LaTeX
 (load-file "~/.emacs.d/latex.el")
