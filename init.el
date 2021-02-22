@@ -11,6 +11,14 @@
   (package-install 'use-package))
 
 
+;; Update packages automatically
+(use-package auto-package-update
+  :config
+  (setq auto-package-update-delete-old-versions t)
+  (setq auto-package-update-hide-results t)
+  (auto-package-update-maybe))
+
+
 ;; Persist the mini-buffer command histor
 (savehist-mode 1)
 
@@ -65,7 +73,6 @@
   :init (global-company-mode 1))
 
 
-
 ;; YAML
 (use-package yaml-mode
   :ensure t
@@ -80,6 +87,7 @@
                                 (setq indent-tabs-mode nil)
                                 (whitespace-mode)))
   )
+
 
 ;; Typescript
 (use-package typescript-mode
@@ -112,9 +120,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("039c01abb72985a21f4423dd480ddb998c57d665687786abd4e16c71128ef6ad" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default))
+   '("84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "37768a79b479684b0756dec7c0fc7652082910c37d8863c35b702db3f16000f8" "039c01abb72985a21f4423dd480ddb998c57d665687786abd4e16c71128ef6ad" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default))
  '(package-selected-packages
-   '(rainbow-mode rainbow-blocks rainbow-block leuven-theme molokai-theme beacon flycheck flyspell aggressive-indent company-reftex company-bibtex company-auctex auto-dictionary auctex LaTeX indent-guide rainbow-delimiters lsp-python-ms lsp-ui lsp-treemacs lsp-dart dart-mode csv-mode yaml-mode typescript-mode ssh-agency markdown-mode magit)))
+   '(smart-mode-line-powerline-theme nlinum nord-theme rainbow-mode rainbow-blocks rainbow-block leuven-theme molokai-theme beacon flycheck flyspell aggressive-indent company-reftex company-bibtex company-auctex auto-dictionary auctex LaTeX indent-guide rainbow-delimiters lsp-python-ms lsp-ui lsp-treemacs lsp-dart dart-mode csv-mode yaml-mode typescript-mode ssh-agency markdown-mode magit)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -9,7 +9,7 @@
 (use-package reftex
   :defer t
   :config
-  (setq reftex-default-bibliography "./references.bib")
+  (setq reftex-default-bibliography "~/Documents/home/pub/sindit/references.bib")
   :commands turn-on-reftex)
 
 
@@ -18,6 +18,8 @@
   :config
   (setq TeX-master nil)
   (setq reftex-plug-into-AUCTeX t)
+  (setq TeX-parse-self t)
+  (setq TeX-auto-save t)
   :hook (LaTeX-mode-hook . 'turn-on-reftex))
 
 
