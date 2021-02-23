@@ -28,7 +28,7 @@
 (global-hl-line-mode 1)
 
 
-;; Theme: Set colors for font-lock mode,
+;; Theme: Set colours for font-lock mode,
 (use-package nord-theme
   :ensure t
   :init(load-theme 'nord t))

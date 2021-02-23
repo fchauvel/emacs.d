@@ -45,6 +45,11 @@
 (savehist-mode 1)
 
 
+;; Avoid splitting the windows horizontally
+(setq split-height-threshold 2000
+      split-width-threshold 100)
+
+
 ;; Look & Feel
 (load-file "~/.emacs.d/appearence.el")
 
