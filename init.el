@@ -1,6 +1,7 @@
 ;; Setup Melpa & refresh the packages info
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/") t)
 (package-refresh-contents)
 (package-initialize)
 
@@ -13,10 +14,22 @@
 
 ;; Update packages automatically
 (use-package auto-package-update
+  :ensure t
   :config
   (setq auto-package-update-delete-old-versions t)
   (setq auto-package-update-hide-results t)
   (auto-package-update-maybe))
+
+
+;; Restore the open buffers on restart
+(use-package desktop
+  :defer 2
+  :config
+  (setq desktop-path (list "~./.emacs.d/desktop"))
+  (setq desktop-dirname "~/.emacs.d/desktop")
+  (setq desktop-restore-eager 5)
+  (setq desktop-load-locked-desktop t)
+  (desktop-save-mode +1))
 
 
 ;; Persist the mini-buffer command histor
@@ -30,20 +43,23 @@
 ;; No tabs by default
 (setq-default indent-tabs-mode nil)
 
+
+
 ;; Whitespace in programming
 (require 'whitespace)
 (add-hook 'prog-mode-hook
-           (lambda ()
-             (whitespace-mode)))
+          (lambda ()
+            (whitespace-mode)))
 
 
 ;; White space cleanup on save / in prog-mode
 (add-hook 'before-save-hook
-           (lambda ()
-             (unless indent-tabs-mode
-               (untabify (point-min) (point-max)))
-             (when (derived-mode-p 'prog-mode)
-               (whitespace-cleanup))))
+          (lambda ()
+            (unless indent-tabs-mode
+              (untabify (point-min) (point-max)))
+            (when (derived-mode-p 'prog-mode)
+              (whitespace-cleanup))))
+
 
 ;; Indentation as you type
 (use-package aggressive-indent
@@ -62,7 +78,6 @@
 
 ;; Dart & Flutter
 (load-file "~/.emacs.d/flutter.el")
-
 
 
 ;; Auto-completion
@@ -122,7 +137,7 @@
  '(custom-safe-themes
    '("84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "37768a79b479684b0756dec7c0fc7652082910c37d8863c35b702db3f16000f8" "039c01abb72985a21f4423dd480ddb998c57d665687786abd4e16c71128ef6ad" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default))
  '(package-selected-packages
-   '(smart-mode-line-powerline-theme nlinum nord-theme rainbow-mode rainbow-blocks rainbow-block leuven-theme molokai-theme beacon flycheck flyspell aggressive-indent company-reftex company-bibtex company-auctex auto-dictionary auctex LaTeX indent-guide rainbow-delimiters lsp-python-ms lsp-ui lsp-treemacs lsp-dart dart-mode csv-mode yaml-mode typescript-mode ssh-agency markdown-mode magit)))
+   '(auto-package-update smart-mode-line-powerline-theme nlinum nord-theme rainbow-mode rainbow-blocks rainbow-block leuven-theme molokai-theme beacon flycheck flyspell aggressive-indent company-reftex company-bibtex company-auctex auto-dictionary auctex LaTeX indent-guide rainbow-delimiters lsp-python-ms lsp-ui lsp-treemacs lsp-dart dart-mode csv-mode yaml-mode typescript-mode ssh-agency markdown-mode magit)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

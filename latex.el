@@ -7,20 +7,22 @@
 
 
 (use-package reftex
-  :defer t
+  :ensure t
   :config
-  (setq reftex-default-bibliography "~/Documents/home/pub/sindit/references.bib")
-  :commands turn-on-reftex)
+  (setq reftex-default-bibliography nil)
+  :commands turn-on-reftex
+  :hook ((LaTeX-mode-hook  .  reftex-mode)
+         (latex-mode-hook  .  reftex-mode)))
 
 
 (use-package auctex
   :ensure t
+  :mode ("\\.tex\\'" . LaTeX-mode)
   :config
-  (setq TeX-master nil)
+  (setq TeX-master "main.tex")
   (setq reftex-plug-into-AUCTeX t)
   (setq TeX-parse-self t)
-  (setq TeX-auto-save t)
-  :hook (LaTeX-mode-hook . 'turn-on-reftex))
+  (setq TeX-auto-save t))
 
 
 (use-package math-symbol-lists
@@ -42,11 +44,9 @@
 (use-package company-reftex
   :ensure t
   :init
-  (setq company-bibtex-bibliography "./references.bib")
-  (add-to-list 'company-backends 'company-reftex-labels)
-  (add-to-list 'company-backends 'company-reftex-citations))
+  (setq company-bibtex-bibliography "references.bib"))
 
 
 (use-package company-auctex
   :ensure t
-  :config (company-auctex-init))
+  :init (company-auctex-init))
