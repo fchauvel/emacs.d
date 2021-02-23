@@ -15,8 +15,10 @@
   (setq sml/theme 'powerline)
   (add-hook 'after-init-hook 'sml/setup))
 
+;; Line numbers on the side
 (use-package nlinum
-  :config
+  :ensure t
+  :init
   (global-nlinum-mode))
 
 ;; Disable the bell
@@ -26,12 +28,6 @@
 (global-hl-line-mode 1)
 
 
-;; Line number on the side
-(use-package nlinum
-  :ensure t
-  :init
-  (global-nlinum-mode t))
-
 ;; Theme: Set colors for font-lock mode,
 (use-package nord-theme
   :ensure t
@@ -40,19 +36,17 @@
 ;; Shows where the cursor jumps
 (use-package beacon
   :config
-  (beacon-mode t)
-  )
+  (beacon-mode t))
 
 ;; Rainbow delimiters: Color the delimiters according to their depth
 (use-package rainbow-delimiters
   :ensure t
-  :init
-  :hook (prog-mode . rainbow-mode))
+  :hook ((prog-mode . rainbow-delimiters-mode)))
 
+;; Colour codes (e.g. #ff0077) are displayed with the appropriate colour
 (use-package rainbow-mode
   :ensure t
-  :init
-  :hook (prog-mode . rainbow-mode))
+  :hook ((prog-mode . rainbow-mode)))
 
 ;; Indent guide: Show markers in front of the current scope
 (use-package indent-guide

@@ -21,18 +21,27 @@
   (auto-package-update-maybe))
 
 
+
 ;; Restore the open buffers on restart
+
+(defvar franck/desktop-directory "~/.emacs.d/desktop",
+  "Hold the directory where Emacs saves the current session's buffers.")
+
+(unless (file-exists-p franck/desktop-directory)
+  (make-directory franck/desktop-directory))
+
 (use-package desktop
-  :defer 2
-  :config
-  (setq desktop-path (list "~./.emacs.d/desktop"))
-  (setq desktop-dirname "~/.emacs.d/desktop")
-  (setq desktop-restore-eager 5)
-  (setq desktop-load-locked-desktop t)
-  (desktop-save-mode +1))
+  :ensure t
+  :init
+  (setq desktop-path (list franck/desktop-directory)
+        desktop-dirname franck/desktop-directory
+        desktop-restore-eager 5
+        desktop-load-locked-desktop t
+        desktop-save t)
+  (desktop-save-mode 1))
 
 
-;; Persist the mini-buffer command histor
+;; Persist the mini-buffer command history
 (savehist-mode 1)
 
 
@@ -63,12 +72,13 @@
 
 ;; Indentation as you type
 (use-package aggressive-indent
-  :ensure t
-  :hook (prog-mode . aggressive-indent-mode))
-
+  :ensure t)
 
 ;; Git
 (load-file "~/.emacs.d/git.el")
+
+;; Common settings for multiple programming languages
+(load-file "~/.emacs.d/commons.el")
 
 ;; LaTeX
 (load-file "~/.emacs.d/latex.el")
@@ -137,7 +147,7 @@
  '(custom-safe-themes
    '("84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "37768a79b479684b0756dec7c0fc7652082910c37d8863c35b702db3f16000f8" "039c01abb72985a21f4423dd480ddb998c57d665687786abd4e16c71128ef6ad" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default))
  '(package-selected-packages
-   '(auto-package-update smart-mode-line-powerline-theme nlinum nord-theme rainbow-mode rainbow-blocks rainbow-block leuven-theme molokai-theme beacon flycheck flyspell aggressive-indent company-reftex company-bibtex company-auctex auto-dictionary auctex LaTeX indent-guide rainbow-delimiters lsp-python-ms lsp-ui lsp-treemacs lsp-dart dart-mode csv-mode yaml-mode typescript-mode ssh-agency markdown-mode magit)))
+   '(pyvenv jed-core company-jedi auto-package-update smart-mode-line-powerline-theme nlinum nord-theme rainbow-mode rainbow-blocks rainbow-block leuven-theme molokai-theme beacon flycheck flyspell aggressive-indent company-reftex company-bibtex company-auctex auto-dictionary auctex LaTeX indent-guide rainbow-delimiters lsp-python-ms lsp-ui lsp-treemacs lsp-dart dart-mode csv-mode yaml-mode typescript-mode ssh-agency markdown-mode magit)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
