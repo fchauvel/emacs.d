@@ -2,7 +2,9 @@
 
 ;; Remove menu bar and scroll bars
 (menu-bar-mode -1)
+(require 'scroll-bar)
 (toggle-scroll-bar -1)
+
 (tool-bar-mode -1)
 
 ;; Set a  nicer modeline
@@ -35,6 +37,7 @@
 
 ;; Shows where the cursor jumps
 (use-package beacon
+  :ensure t
   :config
   (beacon-mode t))
 

@@ -1,10 +1,14 @@
 ;; Setup Melpa & refresh the packages info
+
+;;(unless (version< emacs-version "27.0" )
+  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+;;  )
+
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
-(package-refresh-contents)
 (package-initialize)
-
+(package-refresh-contents)
 
 ;; Install use-package if not available
 (unless (package-installed-p 'use-package)
@@ -20,8 +24,12 @@
   (setq auto-package-update-hide-results t)
   (auto-package-update-maybe))
 
-
-
+;; Move all Emacs auto configuration in a separate file
+(defvar franck/auto-custom-config "~/.emacs.d/custom.el")
+(setq custom-file franck/auto-custom-config)
+(when (file-exists-p franck/auto-custom-config)
+  (load-file franck/auto-custom-config))
+  
 ;; Restore the open buffers on restart
 
 (defvar franck/desktop-directory "~/.emacs.d/desktop",
@@ -142,20 +150,4 @@
 (if (eq system-type 'windows-nt)
     (load-file "~/.emacs.d/windows.el"))
 
-
 ;; -- End of customization -------------------------------------------
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "37768a79b479684b0756dec7c0fc7652082910c37d8863c35b702db3f16000f8" "039c01abb72985a21f4423dd480ddb998c57d665687786abd4e16c71128ef6ad" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" default))
- '(package-selected-packages
-   '(pyvenv jed-core company-jedi auto-package-update smart-mode-line-powerline-theme nlinum nord-theme rainbow-mode rainbow-blocks rainbow-block leuven-theme molokai-theme beacon flycheck flyspell aggressive-indent company-reftex company-bibtex company-auctex auto-dictionary auctex LaTeX indent-guide rainbow-delimiters lsp-python-ms lsp-ui lsp-treemacs lsp-dart dart-mode csv-mode yaml-mode typescript-mode ssh-agency markdown-mode magit)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
