@@ -71,7 +71,7 @@
 
 
 ;; Look & Feel
-(load-file "~/.emacs.d/appearence.el")
+(load-file "~/.emacs.d/appearance.el")
 
 
 ;; No tabs by default
