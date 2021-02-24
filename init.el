@@ -1,24 +1,26 @@
 ;; Setup Melpa & refresh the packages info
 
-;;(unless (version< emacs-version "27.0" )
-  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-;;  )
+(when (version< emacs-version "27.0" )
+  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
 
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
-(package-initialize)
-(package-refresh-contents)
+
+(unless package-archive-contents
+  (package-initialize)
+  (package-refresh-contents))
+
 
 ;; Install use-package if not available
 (unless (package-installed-p 'use-package)
-  (package-refresh-contents)
   (package-install 'use-package))
 
 
 ;; Update packages automatically
 (use-package auto-package-update
   :ensure t
+  :defer t
   :config
   (setq auto-package-update-delete-old-versions t)
   (setq auto-package-update-hide-results t)
@@ -29,7 +31,8 @@
 (setq custom-file franck/auto-custom-config)
 (when (file-exists-p franck/auto-custom-config)
   (load-file franck/auto-custom-config))
-  
+
+
 ;; Restore the open buffers on restart
 
 (defvar franck/desktop-directory "~/.emacs.d/desktop",
@@ -40,6 +43,7 @@
 
 (use-package desktop
   :ensure t
+  :defer t
   :init
   (setq desktop-path (list franck/desktop-directory)
         desktop-dirname franck/desktop-directory
@@ -56,6 +60,14 @@
 ;; Avoid splitting the windows horizontally
 (setq split-height-threshold 2000
       split-width-threshold 100)
+
+
+;; Jump to any windows by name
+(use-package ace-window
+  :ensure t
+  :bind ("M-o" . ace-window)
+  :config
+  (ace-window-display-mode 1))
 
 
 ;; Look & Feel
@@ -85,7 +97,8 @@
 
 ;; Indentation as you type
 (use-package aggressive-indent
-  :ensure t)
+  :ensure t
+  :defer t)
 
 ;; Git
 (load-file "~/.emacs.d/git.el")
@@ -102,18 +115,27 @@
 ;; Dart & Flutter
 (load-file "~/.emacs.d/flutter.el")
 
+;; JavaScript
+(load-file "~/.emacs.d/js.el")
+
 
 ;; Auto-completion
 (use-package company
   :ensure t
+  :defer t
+  :bind (("C-<tab>" . company-complete))
   :custom
-  (company-idle-delay 0.0 "Recommended by lsp")
+  (setq company-idle-delay              0.1
+        company-minimum-prefix-length   0
+        company-show-numbers            t
+        company-tooltip-limit           20)
   :init (global-company-mode 1))
 
 
 ;; YAML
 (use-package yaml-mode
   :ensure t
+  :defer t
   :mode ("\\.yml$" . yaml-mode))
 
 ;; Markdown
@@ -130,6 +152,7 @@
 ;; Typescript
 (use-package typescript-mode
   :ensure t
+  :defer t
   :hook (typescript-mode-hook .
                               (lambda ()
                                 (make-local-variable 'indent-tabs-mode)
@@ -140,6 +163,7 @@
 ;; Flyspell
 (use-package flyspell
   :ensure t
+  :defer t
   :hook
   (text-mode . turn-on-flyspell)
   (tex-mode . turn-on-flyspell)
@@ -150,4 +174,11 @@
 (if (eq system-type 'windows-nt)
     (load-file "~/.emacs.d/windows.el"))
 
-;; -- End of customization -------------------------------------------
+;; Measure Emacs startup  time
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (message "Emacs ready in %s with %d garbage collections."
+                     (format "%.2f seconds"
+                             (float-time
+                              (time-subtract after-init-time before-init-time)))
+                     gcs-done)))

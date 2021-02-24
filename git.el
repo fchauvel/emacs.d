@@ -4,6 +4,7 @@
 ;; Required by magit to use the SSH agent on Windows
 (use-package ssh-agency
   :ensure t
+  :defer t
   :config
   (unless (file-exists-p "~/.ssh/id_rsa.pub")
     (remove-hook 'magit-credential-hook 'ssh-agency-ensure))
@@ -12,4 +13,5 @@
 
 ;; Magit
 (use-package magit
-  :ensure t)
+  :ensure t
+  :defer t)
