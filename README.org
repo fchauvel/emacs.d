@@ -1,0 +1,67 @@
+#+TITLE: Emacs Configuration
+
+This is my Emacs configuration, which I use to develop and take notes.
+
+* Installation
+
+Simply erase any existing configuration, clone the repository, and
+then restart Emacs. Note that the first start up can take a few
+minutes as Emacs will pull quite a few packages from MELPA.
+
+#+begin_src shell-session
+$ rm -rf ~/.emacs.d
+$ git clone git@github.com:fchauvel/emacs.d ~/.emacs.d
+#+end_src
+
+
+* Emacs Behaviour
+
+
+* Look n' Feel
+
+I use the [[https://www.nordtheme.com/][Nord theme]], which works out of the box in most
+cases. However, if you run Emacs from a terminal (typically using
+emacs-nox on Linux), you need to configure the terminal to work
+properly.
+
+#+BEGIN_src shell-session
+$ apt-get update
+$ apt-get install --yes
+#+end_src
+
+
+* Integrated Development Environments
+
+** Python
+
+The Python IDE requires the installation of a Python Language Server
+from the command line, to be installed globally!
+
+#+BEGIN_SRC shell-session
+$ pip install python-language-server[all]
+#+END_SRC
+
+** JavaScript
+   
+The JavaScript IDE also use LSP and thus requires to install the
+package globally using NPM.
+
+#+BEGIN_SRC shell-session
+$ npm install -g  
+#+END_SRC
+
+** Dart & Flutter
+** LaTeX
+
+
+* Notes Taking
+
+I use [[http://org-roam.com][Org-roam]] to manage my notes, which requires ~sqlite3.exe~ to be
+available in the PATH.
+
+  - On windows, the simplest solution is two download the DLL and the
+    command line tools from [[https://www.sqlite.org/download.html][SQLite]], and to unzip all into a folder,
+    say ~C:/tools/sqlite~.
+
+
+

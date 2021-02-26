@@ -118,6 +118,9 @@
 ;; JavaScript
 (load-file "~/.emacs.d/js.el")
 
+;; Org-Mode
+(load-file "~/.emacs.d/org.el")
+
 
 ;; Auto-completion
 (use-package company
