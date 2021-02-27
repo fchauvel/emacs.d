@@ -3,7 +3,10 @@
 (use-package org-ref
   :ensure t
   :config
-  (setq reftex-default-bibliography "~/notes/references.bib"))
+  (setq reftex-default-bibliography "~/notes/references.bib"
+        org-ref-bibliography-notes "~/notes/references.org"
+        org-ref-default-bibliography '("~/notes/references.bib")
+        org-ref-pdf-directory "~/notes/pdf/"))
 
 (use-package org-roam
       :ensure t

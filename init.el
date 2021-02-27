@@ -27,10 +27,17 @@
   (auto-package-update-maybe))
 
 ;; Move all Emacs auto configuration in a separate file
-(defvar franck/auto-custom-config "~/.emacs.d/custom.el")
-(setq custom-file franck/auto-custom-config)
-(when (file-exists-p franck/auto-custom-config)
-  (load-file franck/auto-custom-config))
+(defvar my/auto-custom-config "~/.emacs.d/custom.el")
+(setq custom-file my/auto-custom-config)
+(when (file-exists-p my/auto-custom-config)
+  (load-file my/auto-custom-config))
+
+
+;; Move all backup file in a  single location
+(defvar my/emacs-backup-directory "~/.emacs.d/backups")
+(unless (file-exists-p my/emacs-backup-directory)
+  (make-directory my/emacs-backup-directory))
+(setq backup-directory-alist `(("." . ,my/emacs-backup-directory)))
 
 
 ;; Restore the open buffers on restart
@@ -120,6 +127,12 @@
 
 ;; Org-Mode
 (load-file "~/.emacs.d/org.el")
+
+
+;; Fuzzy Matching
+(use-package helm
+  :demand t
+  :bind ("M-x" . helm-M-x))
 
 
 ;; Auto-completion

@@ -1,6 +1,11 @@
 ;; Configuration for LaTeX editing
 
 
+;; Configuration of the built-in BibTeX mode
+
+(setq bibtex-autokey-year-length 4
+      bibtex-maintain-sorted-entries t)
+
 (use-package tex-site
   :ensure auctex
   :defer t
