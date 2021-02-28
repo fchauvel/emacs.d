@@ -132,57 +132,58 @@
 ;; Fuzzy Matching
 (use-package helm
   :demand t
-  :bind ("M-x" . helm-M-x))
+  :bind ("M-x" . helm-M-x)
+  :config (helm-mode 1))
 
 
 ;; Auto-completion
 (use-package company
-  :ensure t
-  :defer t
-  :bind (("C-<tab>" . company-complete))
-  :custom
-  (setq company-idle-delay              0.1
-        company-minimum-prefix-length   0
-        company-show-numbers            t
-        company-tooltip-limit           20)
-  :init (global-company-mode 1))
+ :ensure t
+ :defer t
+ :bind (("C-<tab>" . company-complete))
+ :custom
+ (setq company-idle-delay              0.1
+       company-minimum-prefix-length   0
+       company-show-numbers            t
+       company-tooltip-limit           20)
+ :init (global-company-mode 1))
 
 
 ;; YAML
 (use-package yaml-mode
-  :ensure t
-  :defer t
-  :mode ("\\.yml$" . yaml-mode))
+ :ensure t
+ :defer t
+ :mode ("\\.yml$" . yaml-mode))
 
 ;; Markdown
 (use-package markdown-mode
-  :mode (("\\.markdown$" . markdown-mode)
-         ("\\.md$" . markdown-mode))
-  :hook (markdown-mode-hook . (lambda ()
-                                (make-local-variable 'indent-tabs-mode)
-                                (setq indent-tabs-mode nil)
-                                (whitespace-mode)))
-  )
+ :mode (("\\.markdown$" . markdown-mode)
+        ("\\.md$" . markdown-mode))
+ :hook (markdown-mode-hook . (lambda ()
+                               (make-local-variable 'indent-tabs-mode)
+                               (setq indent-tabs-mode nil)
+                               (whitespace-mode)))
+ )
 
 
 ;; Typescript
 (use-package typescript-mode
-  :ensure t
-  :defer t
-  :hook (typescript-mode-hook .
-                              (lambda ()
-                                (make-local-variable 'indent-tabs-mode)
-                                (setq indent-tabs-mode nil)
-                                (whitespace-mode)))
-  )
+ :ensure t
+ :defer t
+ :hook (typescript-mode-hook .
+                             (lambda ()
+                               (make-local-variable 'indent-tabs-mode)
+                               (setq indent-tabs-mode nil)
+                               (whitespace-mode)))
+ )
 
 ;; Flyspell
 (use-package flyspell
-  :ensure t
-  :defer t
-  :hook
-  (text-mode . turn-on-flyspell)
-  (tex-mode . turn-on-flyspell)
+ :ensure t
+ :defer t
+ :hook
+ (text-mode . turn-on-flyspell)
+ (tex-mode . turn-on-flyspell)
   (prog-mode . flyspell-prog-mode))
 
 
