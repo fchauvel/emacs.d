@@ -33,7 +33,9 @@
 ;; Theme: Set colours for font-lock mode,
 (use-package nord-theme
   :ensure t
-  :init(load-theme 'nord t))
+  :init (progn
+          (setq nord-comment-brightness 15)
+          (load-theme 'nord t)))
 
 ;; Shows where the cursor jumps
 (use-package beacon
