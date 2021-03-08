@@ -69,7 +69,7 @@
       split-width-threshold 100)
 
 
-;; Jump to any windows by name
+; Jump to any windows by name
 (use-package ace-window
   :ensure t
   :bind ("M-o" . ace-window)
@@ -136,6 +136,7 @@
   :config (helm-mode 1))
 
 
+
 ;; Auto-completion
 (use-package company
  :ensure t
@@ -154,6 +155,7 @@
  :ensure t
  :defer t
  :mode ("\\.yml$" . yaml-mode))
+
 
 ;; Markdown
 (use-package markdown-mode
