@@ -56,7 +56,7 @@
   :ensure t
   :defer t
   :init
-  (setq company-bibtex-bibliography "references.bib"))
+  (setq company-bibtex-bibliography "~/notes/references.bib"))
 
 
 (use-package company-auctex

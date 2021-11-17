@@ -113,6 +113,9 @@
 ;; Common settings for multiple programming languages
 (load-file "~/.emacs.d/commons.el")
 
+;; Lisp / Scheme
+(load-file "~/.emacs.d/scheme.el")
+
 ;; LaTeX
 (load-file "~/.emacs.d/latex.el")
 
@@ -121,6 +124,9 @@
 
 ;; Dart & Flutter
 (load-file "~/.emacs.d/flutter.el")
+
+;; Weh / HTML
+(load-file "~/.emacs.d/web.el")
 
 ;; JavaScript
 (load-file "~/.emacs.d/js.el")
@@ -148,7 +154,6 @@
        company-show-numbers            t
        company-tooltip-limit           20)
  :init (global-company-mode 1))
-
 
 ;; YAML
 (use-package yaml-mode
@@ -179,19 +184,31 @@
                                (whitespace-mode)))
  )
 
+
+;; Dockerfile
+(use-package dockerfile-mode
+ :ensure t
+ :defer t)
+
+
 ;; Flyspell
 (use-package flyspell
  :ensure t
  :defer t
+ :init (setq ispell-program-name "/opt/homebrew/bin/ispell")
  :hook
  (text-mode . turn-on-flyspell)
  (tex-mode . turn-on-flyspell)
-  (prog-mode . flyspell-prog-mode))
+ (prog-mode . flyspell-prog-mode))
 
 
-;; Load windows configuration if needed
+;; Load specific windows configuration if needed
 (if (eq system-type 'windows-nt)
     (load-file "~/.emacs.d/windows.el"))
+
+;; Load specific MacOS configuration if needed
+(if (eq system-type 'darwin)
+    (load-file "~/.emacs.d/macos.el"))
 
 ;; Measure Emacs startup  time
 (add-hook 'emacs-startup-hook
@@ -201,3 +218,4 @@
                              (float-time
                               (time-subtract after-init-time before-init-time)))
                      gcs-done)))
+(put 'downcase-region 'disabled nil)
