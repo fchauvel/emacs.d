@@ -1,0 +1,150 @@
+#+title: IDE Configuration
+
+The following fragments configure Emacs as an IDE for various
+languages, using language server protocols (LSP).
+
+* Programming Text Editor
+
+  Basic configurations:
+  * Disable tabulations
+  * Activate column number mode
+  * Show lines numbers straight into the editor
+    
+  #+begin_src emacs-lisp
+    (setq-default indent-tabs-mode nil)
+    (setq-default column-number-mode t)
+
+    (use-package nlinum
+      :hook ((prog-mode . nlinum-mode)))
+  #+end_src
+
+
+** Showing non-printable characters
+  
+   We activate showing the whitespace and other non-printable
+   characters
+   #+begin_src emacs-lisp
+     (require 'whitespace)
+     (add-hook 'prog-mode-hook
+               (lambda ()
+                 (whitespace-mode)
+                 ))
+   #+end_src
+
+   White space cleanup on save / in prog-mode
+   #+begin_src emacs-lisp
+     (add-hook 'before-save-hook
+               (lambda ()
+                 (unless indent-tabs-mode
+                   (untabify (point-min) (point-max)))
+                 (when (derived-mode-p 'prog-mode)
+                   (whitespace-cleanup))))
+   #+end_src
+
+** Programming Aids
+
+   Show brackets of matching colors, according to their nesting depth.
+   #+begin_src emacs-lisp
+     (use-package rainbow-delimiters
+       :hook ((prog-mode . rainbow-delimiters-mode)))
+   #+end_src
+
+   Colour codes (e.g. #ff0077) are displayed with the appropriate colour
+   #+begin_src emacs-lisp
+     (use-package rainbow-mode
+       :hook ((prog-mode . rainbow-mode)))
+   #+end_src
+
+   Indent guide: Show markers in front of the current scope
+   #+begin_src emacs-lisp
+     (use-package indent-guide
+       :init
+       (progn
+         (indent-guide-global-mode)
+         (setq indent-guide-recursive t)))
+   #+end_src
+
+   
+* LSP configuration
+  
+  #+begin_src emacs-lisp
+    (use-package flycheck)
+
+    (use-package company
+      :hook (prog-mode . company-mode)
+      :config
+      (setq lsp-completion-provider :capf))
+
+    (use-package lsp-mode
+      :init
+      (setq lsp-keymap-prefix "C-c l")
+      :config
+      (setq lsp-headerline-breadcrumb-enable nil)
+      :hook (
+             (java-mode . #'lsp-deferred)
+             (lsp-mode . lsp-lens-mode))
+      :commands lsp)
+
+    (use-package lsp-ui
+      :commands lsp-ui-mode
+      :hook (
+             (lsp-mode . lsp-ui-mode))
+      :config
+      (setq lsp-ui-sideline-show-code-actions t))
+
+
+    (use-package helm-lsp
+      :after (treemacs lsp-treemacs)
+      :commands helm-lsp-workspace-symbol)
+  #+end_src
+
+  #+RESULTS:
+
+** Icons Set "all-the-icons"
+
+   Sep. 2022: Could not get this one to work. So I disabled it.
+   
+   #+begin_src emacs-lisp
+     (use-package all-the-icons)
+   #+end_src
+  
+** Treemacs
+
+   Provide a visual "tree-like" view of the project folder. We
+   configure here a simple one without icons.
+
+   #+begin_src emacs-lisp
+     (use-package treemacs
+       :after (lsp-mode)
+       :commands (treemacs)
+       :hook (
+              (treemacs-mode . (lambda () (linum-mode -1))))
+       :config
+       (progn
+         (with-eval-after-load 'ace-window
+           (setq aw-ignored-buffers (delq 'treemacs-mode aw-ignored-buffers)))
+         (setq treemacs-no-png-images t
+               treemacs-indent-guide-style 'line)
+         (linum-mode -1)
+         ;; (treemacs-indent-guide-mode)
+         )
+       )
+
+     (use-package treemacs-magit
+       :after (treemacs magit))
+
+     ;; Could not get this to work
+     ;; (use-package treemacs-all-the-icons
+     ;;   :after (treemacs)
+     ;;   :config
+     ;;   (treemacs-load-theme "all-the-icons") 
+     ;;   );
+
+     (use-package lsp-treemacs
+       :after (lsp-mode treemacs)
+       :commands lsp-treemacs-errors-list)
+   #+end_src
+
+   #+RESULTS:
+
+ 

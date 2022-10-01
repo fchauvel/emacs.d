@@ -17,12 +17,6 @@
   (setq sml/theme 'powerline)
   (add-hook 'after-init-hook 'sml/setup))
 
-;; Line numbers on the side
-(use-package nlinum
-  :ensure t
-  :init
-  (global-nlinum-mode))
-
 ;; Disable the bell
 (setq ring-bell-function 'ignore)
 
@@ -42,21 +36,3 @@
   :ensure t
   :config
   (beacon-mode t))
-
-;; Rainbow delimiters: Color the delimiters according to their depth
-(use-package rainbow-delimiters
-  :ensure t
-  :hook ((prog-mode . rainbow-delimiters-mode)))
-
-;; Colour codes (e.g. #ff0077) are displayed with the appropriate colour
-(use-package rainbow-mode
-  :ensure t
-  :hook ((prog-mode . rainbow-mode)))
-
-;; Indent guide: Show markers in front of the current scope
-(use-package indent-guide
-  :ensure t
-  :init
-  (progn
-    (indent-guide-global-mode)
-    (setq indent-guide-recursive t)))

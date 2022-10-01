@@ -1,0 +1,39 @@
+#+title: Navigation
+
+* Windows Management
+
+  Jump from one window to another using the /ace-window/ package.
+
+  #+begin_src emacs-lisp
+    (use-package ace-window
+      :bind ("M-o" . ace-window)
+      :config
+      (ace-window-display-mode 1))
+  #+end_src
+
+  
+* Help & Shortcuts
+
+  Use which-key to show the shortcuts available
+
+  #+begin_src emacs-lisp
+    (use-package which-key
+      :init
+      (which-key-mode))
+  #+end_src  
+  
+  We use the /helm-swoop/ package to search through files, possibly
+  through multiple files.
+  #+begin_src emacs-lisp
+    (use-package helm-swoop
+      :bind (
+             ("M-i" . helm-swoop)
+             ("C-c M-i" . helm-multi-swoop)
+         )
+      :init
+      (setq helm-swoop-use-fuzzy-match t))
+  #+end_src
+
+
+  
+

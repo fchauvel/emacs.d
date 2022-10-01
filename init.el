@@ -5,21 +5,17 @@
 
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/") t)
+            '("melpa" . "https://melpa.org/packages/") t);
 
 (unless package-archive-contents
-  (package-initialize)
-  (package-refresh-contents))
-
-
-;; Install use-package if not available
+ (package-initialize)
+ (package-refresh-contents))
 (unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-
+ (package-install 'use-package))
+(setq use-package-always-ensure t)
 
 ;; Update packages automatically
 (use-package auto-package-update
-  :ensure t
   :defer t
   :config
   (setq auto-package-update-delete-old-versions t)
@@ -31,7 +27,6 @@
 (setq custom-file my/auto-custom-config)
 (when (file-exists-p my/auto-custom-config)
   (load-file my/auto-custom-config))
-
 
 ;; Move all backup file in a  single location
 (defvar my/emacs-backup-directory "~/.emacs.d/backups")
@@ -68,72 +63,47 @@
 (setq split-height-threshold 2000
       split-width-threshold 100)
 
-
-; Jump to any windows by name
-(use-package ace-window
-  :ensure t
-  :bind ("M-o" . ace-window)
-  :config
-  (ace-window-display-mode 1))
-
+;; Navigation & Shortcuts
+(org-babel-load-file "~/.emacs.d/navigation.org")
 
 ;; Look & Feel
 (load-file "~/.emacs.d/appearance.el")
 
+;; Common settings for multiple programming languages
+(org-babel-load-file "~/.emacs.d/ide.org")
 
-;; No tabs by default
-(setq-default indent-tabs-mode nil)
-
-
-
-;; Whitespace in programming
-(require 'whitespace)
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (whitespace-mode)))
-
-
-;; White space cleanup on save / in prog-mode
-(add-hook 'before-save-hook
-          (lambda ()
-            (unless indent-tabs-mode
-              (untabify (point-min) (point-max)))
-            (when (derived-mode-p 'prog-mode)
-              (whitespace-cleanup))))
-
-
-;; Indentation as you type
-(use-package aggressive-indent
-  :ensure t
-  :defer t)
+;; Common settings for multiple programming languages
+(org-babel-load-file "~/.emacs.d/java.org")
 
 ;; Git
 (load-file "~/.emacs.d/git.el")
 
-;; Common settings for multiple programming languages
-(load-file "~/.emacs.d/commons.el")
-
 ;; Lisp / Scheme
-(load-file "~/.emacs.d/scheme.el")
+;;(load-file "~/.emacs.d/scheme.el")
 
 ;; LaTeX
-(load-file "~/.emacs.d/latex.el")
+;; (load-file "~/.emacs.d/latex.el")
 
 ;; Python
 (load-file "~/.emacs.d/python.el")
 
 ;; Dart & Flutter
-(load-file "~/.emacs.d/flutter.el")
+;;(load-file "~/.emacs.d/flutter.el")
 
 ;; Weh / HTML
-(load-file "~/.emacs.d/web.el")
+;;(load-file "~/.emacs.d/web.el")
 
 ;; JavaScript
-(load-file "~/.emacs.d/js.el")
+;;(load-file "~/.emacs.d/js.el")
+
+;; Typescript
+(load-file "~/.emacs.d/typescript.el")
 
 ;; Org-Mode
 (load-file "~/.emacs.d/org.el")
 
+;; R
+(load-file "~/.emacs.d/r.el")
 
 ;; Fuzzy Matching
 (use-package helm
@@ -141,19 +111,6 @@
   :bind ("M-x" . helm-M-x)
   :config (helm-mode 1))
 
-
-
-;; Auto-completion
-(use-package company
- :ensure t
- :defer t
- :bind (("C-<tab>" . company-complete))
- :custom
- (setq company-idle-delay              0.1
-       company-minimum-prefix-length   0
-       company-show-numbers            t
-       company-tooltip-limit           20)
- :init (global-company-mode 1))
 
 ;; YAML
 (use-package yaml-mode
@@ -170,19 +127,8 @@
                                (make-local-variable 'indent-tabs-mode)
                                (setq indent-tabs-mode nil)
                                (whitespace-mode)))
- )
+ :init (setq markdown-command "multimarkdown"))
 
-
-;; Typescript
-(use-package typescript-mode
- :ensure t
- :defer t
- :hook (typescript-mode-hook .
-                             (lambda ()
-                               (make-local-variable 'indent-tabs-mode)
-                               (setq indent-tabs-mode nil)
-                               (whitespace-mode)))
- )
 
 
 ;; Dockerfile
