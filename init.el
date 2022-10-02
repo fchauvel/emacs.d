@@ -69,6 +69,10 @@
 ;; Look & Feel
 (load-file "~/.emacs.d/appearance.el")
 
+;; Org-Mode
+(org-babel-load-file "~/.emacs.d/org.el")
+
+
 ;; Common settings for multiple programming languages
 (org-babel-load-file "~/.emacs.d/ide.org")
 
@@ -99,9 +103,6 @@
 ;; Typescript
 (load-file "~/.emacs.d/typescript.el")
 
-;; Org-Mode
-(load-file "~/.emacs.d/org.el")
-
 ;; R
 (load-file "~/.emacs.d/r.el")
 
@@ -128,7 +129,6 @@
                                (setq indent-tabs-mode nil)
                                (whitespace-mode)))
  :init (setq markdown-command "multimarkdown"))
-
 
 
 ;; Dockerfile
