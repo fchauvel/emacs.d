@@ -21,7 +21,15 @@
 
 * Emacs Theme
 
-  We use a more "powerful" modeline.
+  We use [[http://www.proggyfonts.net/][Proggy Fonts]] as the default font.
+
+  #+begin_src emacs-lisp
+    (add-to-list 'default-frame-alist
+                 '(font . "ProggyVector"))
+  #+end_src  
+
+
+  We use a more "powerful" mode-line.
   
   #+begin_src emacs-lisp
     (use-package smart-mode-line-powerline-theme)

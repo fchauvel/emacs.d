@@ -75,12 +75,7 @@
 ;; Common settings for multiple programming languages
 (org-babel-load-file "~/.emacs.d/ide.org")
 
-;; Common settings for multiple programming languages
-(org-babel-load-file "~/.emacs.d/java.org")
-
 ;; Git
-(load-file "~/.emacs.d/git.el")
-
 ;; Lisp / Scheme
 ;;(load-file "~/.emacs.d/scheme.el")
 
@@ -100,10 +95,9 @@
 ;;(load-file "~/.emacs.d/js.el")
 
 ;; Typescript
-(load-file "~/.emacs.d/typescript.el")
+;;(load-file "~/.emacs.d/typescript.el")
 
 ;; R
-(load-file "~/.emacs.d/r.el")
 
 ;; Fuzzy Matching
 (use-package helm

@@ -21,7 +21,8 @@
   
 * Help & Shortcuts
 
-  Use which-key to show the shortcuts available
+  Use which-key to show the shortcuts available, using ~C-x~and wait a
+  second.
 
   #+begin_src emacs-lisp
     (use-package which-key

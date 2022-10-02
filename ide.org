@@ -18,7 +18,6 @@ languages, using language server protocols (LSP).
       :hook ((prog-mode . nlinum-mode)))
   #+end_src
 
-
 ** Showing non-printable characters
   
    We activate showing the whitespace and other non-printable
@@ -64,6 +63,22 @@ languages, using language server protocols (LSP).
          (setq indent-guide-recursive t)))
    #+end_src
 
+
+** Reusable Fragments
+
+   We use yasnippets to insert predefined code templates.
+
+   #+begin_src emacs-lisp
+     (use-package yasnippet
+       :config
+       (setq
+        yas-verbosity 1
+        yas-wrap-around-region t
+        yas-snippet-dirs '("~/.emacs.d/snippets"))
+       (yas-reload-all)
+       (yas-global-mode))
+   #+end_src
+
    
 * LSP configuration
   
@@ -101,14 +116,8 @@ languages, using language server protocols (LSP).
   #+end_src
 
 
-** Icons Set "all-the-icons"
+* Project Views
 
-   Sep. 2022: Could not get this one to work. So I disabled it.
-   
-   #+begin_src emacs-lisp
-     (use-package all-the-icons)
-   #+end_src
-  
 ** Treemacs
 
    Provide a visual "tree-like" view of the project folder. We
@@ -131,25 +140,98 @@ languages, using language server protocols (LSP).
      (use-package treemacs-magit
        :after (treemacs magit))
 
-     ;; Could not get this to work
-     ;; (use-package treemacs-all-the-icons
-     ;;   :after (treemacs)
-     ;;   :config
-     ;;   (treemacs-load-theme "all-the-icons") 
-     ;;   );
-
      (use-package lsp-treemacs
        :after (lsp-mode treemacs)
        :commands lsp-treemacs-errors-list)
    #+end_src
 
+** Projectile
+
+   [[https://docs.projectile.mx/projectile/index.html][Projectile]] provides various search feature within a project (Git, Maven,
+   etc.). Especially finding file recursively.
+   
+   #+begin_src emacs-lisp
+     (use-package projectile
+       :ensure t
+       :init
+       (projectile-mode +1)
+       :bind (:map projectile-mode-map
+                   ("s-p" . projectile-command-map)
+                   ("C-c p" . projectile-command-map)))
+   #+end_src
+
+   We also install the integration with helm, which provides ~grep~
+   through the whole project, using the command
+   ~helm-projectile-grep~.
+
+   #+begin_src emacs-lisp
+     (use-package helm-projectile
+       :after (helm projectile)
+       :init
+       (setq projectile-completion-system 'helm)
+       :config
+       (require 'helm-projectile)
+       :bind (
+              ("C-c p h" . helm-projectile)
+              )
+       :hook
+       (after-init . helm-projectile-on))
+   #+end_src
+
    #+RESULTS:
+   : helm-projectile-grep
+   
 
-   # #+begin_src emacs-lisp
-   #   (setq treemacs-mode-hook nil)
-   #   treemacs-mode-hook
-   # #+end_src
+* Language-specific Settings
 
-   #+RESULTS:
+** Java
 
- 
+   We simply install the Java "language server protocol".
+
+   #+begin_src emacs-lisp
+     (use-package lsp-java
+       :hook (
+              (java-mode . 'lsp)
+              ))
+   #+end_src
+
+** R
+
+   #+begin_src emacs-lisp
+     (setenv "PATH"
+             (concat
+              "/Library/Frameworks/R.framework/Resources" ":"
+              (getenv "PATH")
+              ))
+
+     (setq inferior-ess-r-program-name "/Library/Frameworks/R.framework/Resources/bin/R")
+   #+end_src
+
+** Typescript
+   
+   Activate the typescript mode.q
+   
+   #+begin_src emacs-lisp
+     (use-package typescript-mode
+       :defer t
+       :mode ("\\.tsx?\\'" . typescript-mode)
+   #+end_src
+   
+* Version Control Systems
+
+** Git
+
+   We use [[https://magit.vc/][Magit]] to interact with Git repositories.
+   
+   #+begin_src emacs-lisp
+     (use-package ssh-agency
+       :defer t
+       :config
+       (unless (file-exists-p "~/.ssh/id_rsa.pub")
+         (remove-hook 'magit-credential-hook 'ssh-agency-ensure))
+       (setenv "SSH_ASKPASS" "git-gui--askpass"))
+     ;; Magit
+     (use-package magit
+       :defer t)
+
+   #+end_src
