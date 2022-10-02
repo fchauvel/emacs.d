@@ -1,0 +1,45 @@
+#+title: Theme
+
+* Overall Layout
+
+  We disable the bell and highlight the current line (where the cursor
+  is).
+
+  #+begin_src emacs-lisp
+    (setq ring-bell-function 'ignore)
+    (global-hl-line-mode 1)
+  #+end_src
+  
+  We disable the scrollbars as well as the menu bar.
+
+  #+begin_src emacs-lisp
+    (menu-bar-mode -1)
+    (require 'scroll-bar)
+    (toggle-scroll-bar -1)
+    (tool-bar-mode -1)
+  #+end_src
+
+* Emacs Theme
+
+  We use a more "powerful" modeline.
+  
+  #+begin_src emacs-lisp
+    (use-package smart-mode-line-powerline-theme)
+
+    (use-package smart-mode-line
+      :config
+      (setq sml/theme 'powerline)
+      (add-hook 'after-init-hook 'sml/setup))
+  #+end_src
+  
+  We use the [[https://www.nordtheme.com/][Nord theme]] overall.
+  
+  #+begin_src emacs-lisp
+    (use-package nord-theme
+      :ensure t
+      :init (progn
+              (setq nord-comment-brightness 15)
+              (load-theme 'nord t)))
+  #+end_src
+
+  

@@ -63,15 +63,14 @@
 (setq split-height-threshold 2000
       split-width-threshold 100)
 
+;; Look & Feel
+(org-babel-load-file "~/.emacs.d/theme.org")
+
 ;; Navigation & Shortcuts
 (org-babel-load-file "~/.emacs.d/navigation.org")
 
-;; Look & Feel
-(load-file "~/.emacs.d/appearance.el")
-
 ;; Org-Mode
 (org-babel-load-file "~/.emacs.d/org.el")
-
 
 ;; Common settings for multiple programming languages
 (org-babel-load-file "~/.emacs.d/ide.org")

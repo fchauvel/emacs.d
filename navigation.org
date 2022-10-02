@@ -11,6 +11,13 @@
       (ace-window-display-mode 1))
   #+end_src
 
+  Highlight where the cursor goes
+
+  #+begin_src emacs-lisp
+    (use-package beacon
+      :config
+      (beacon-mode t))
+  #+end_src
   
 * Help & Shortcuts
 
