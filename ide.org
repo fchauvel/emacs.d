@@ -17,7 +17,7 @@ languages, using language server protocols (LSP).
     (use-package nlinum
       :hook ((prog-mode . nlinum-mode)))
   #+end_src
-
+  
 ** Showing non-printable characters
   
    We activate showing the whitespace and other non-printable
@@ -145,6 +145,7 @@ languages, using language server protocols (LSP).
        :commands lsp-treemacs-errors-list)
    #+end_src
 
+
 ** Projectile
 
    [[https://docs.projectile.mx/projectile/index.html][Projectile]] provides various search feature within a project (Git, Maven,
@@ -178,10 +179,6 @@ languages, using language server protocols (LSP).
        (after-init . helm-projectile-on))
    #+end_src
 
-   #+RESULTS:
-   : helm-projectile-grep
-   
-
 * Language-specific Settings
 
 ** Java
@@ -197,7 +194,12 @@ languages, using language server protocols (LSP).
 
 ** R
 
+   We use [[https://ess.r-project.org/][Emacs Speaks Statistics]] (ESS) to run R within Emacs.
+
    #+begin_src emacs-lisp
+     (use-package ess
+       :init (require 'ess-site))
+
      (setenv "PATH"
              (concat
               "/Library/Frameworks/R.framework/Resources" ":"
@@ -214,9 +216,10 @@ languages, using language server protocols (LSP).
    #+begin_src emacs-lisp
      (use-package typescript-mode
        :defer t
-       :mode ("\\.tsx?\\'" . typescript-mode)
+       :mode ("\\.tsx?\\'" . typescript-mode))
    #+end_src
    
+
 * Version Control Systems
 
 ** Git
