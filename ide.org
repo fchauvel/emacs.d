@@ -17,6 +17,23 @@ languages, using language server protocols (LSP).
     (use-package nlinum
       :hook ((prog-mode . nlinum-mode)))
   #+end_src
+
+  We also use the [[https://github.com/tarsius/hl-todo/tree/6769accd7003ba5a0376d2c5cef0fcffce8f45be][~hl-todo~ package]] to highlight TODO, FIXME and other
+  markers in comments:
+  #+begin_src emacs-lisp
+    (use-package hl-todo
+      :hook ((prog-mode . hl-todo-mode))
+      :bind
+      (("C-c t n" . hl-todo-next)
+       ("C-c t p" . hl-todo-previous))
+      :config (setq hl-todo-keyword-faces '(("TODO" . "#B48EAD")
+                                            ("FIXME". "#EBCB8B")
+                                            ("GOTCHA" ."#D08770")))
+      )
+  #+end_src
+
+  
+   Pick colors from the [[https://www.nordtheme.com/docs/colors-and-palettes][Nord theme]], just for the sake of consistency!
   
 ** Showing non-printable characters
   
