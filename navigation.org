@@ -1,5 +1,20 @@
 #+title: Navigation
 
+
+* Helm: Incremental Completion and Narrowing
+
+  #+begin_src emacs-lisp
+    (use-package helm)
+
+    (global-set-key (kbd "M-x") #'helm-M-x)
+    (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
+    (global-set-key (kbd "C-x C-f") #'helm-find-files)
+  #+end_src
+
+  #+RESULTS:
+  : helm-find-files
+  
+
 * Windows Management
 
   Jump from one window to another using the /ace-window/ package.
@@ -42,6 +57,23 @@
       (setq helm-swoop-use-fuzzy-match t))
   #+end_src
 
+  
+* Disk/File Search
+
+** AG & Helm-AG
+
+  We use [[https://github.com/ggreer/the_silver_searcher][AG --- The Silver Searcher]], to carry out search. Note that it
+  is a CLI tools that has to be installed separately.
+
+  #+begin_src elisp
+    (use-package helm-ag)
+  #+end_src
+
+  #+RESULTS:
+
+  Use ~M-x helm-ag~ to search in the current folder, or ~C-u <folder>
+  M-x helm-ag~ to search somewhere else
 
   
+
 
