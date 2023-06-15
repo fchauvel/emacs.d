@@ -60,8 +60,11 @@
 
 
 ;; Avoid splitting the windows horizontally
-(setq split-height-threshold 2000
+(setq split-height-threshold 4000
       split-width-threshold 100)
+
+;; Basic Configuration
+(org-babel-load-file "~/.emacs.d/basics.org")
 
 ;; Look & Feel
 (org-babel-load-file "~/.emacs.d/theme.org")
@@ -69,18 +72,20 @@
 ;; Navigation & Shortcuts
 (org-babel-load-file "~/.emacs.d/navigation.org")
 
-;; Org-Mode
-(org-babel-load-file "~/.emacs.d/org.el")
+;; LaTeX
+(org-babel-load-file "~/.emacs.d/text.org")
 
-;; Common settings for multiple programming languages
+;; Org-Mode
+(org-babel-load-file "~/.emacs.d/org.org")
+
+;; Common settings for programming
 (org-babel-load-file "~/.emacs.d/ide.org")
 
 ;; Git
 ;; Lisp / Scheme
 ;;(load-file "~/.emacs.d/scheme.el")
 
-;; LaTeX
-;; (load-file "~/.emacs.d/latex.el")
+
 
 ;; Python
 (load-file "~/.emacs.d/python.el")

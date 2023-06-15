@@ -1,0 +1,126 @@
+#+title: Text Edition
+
+
+* Basic Feature
+
+** Title Case
+
+#+begin_src elisp
+  (use-package titlecase
+    :bind (("C-c t" . #'titlecase-line)))
+#+end_src
+
+#+RESULTS:
+: titlecase-line
+
+* LaTeX
+
+We use AucTeX to edit (La)TeX documents.
+
+#+begin_src emacs-lisp
+  (use-package auctex
+    :defer t
+    :mode ("\\.tex\\'" . LaTeX-mode)
+    :hook ((LaTeX-mode . company-mode))
+    :config
+    (setq TeX-master "main.tex"
+          reftex-plug-into-AUCTeX t
+          TeX-parse-self t
+          TeX-auto-save t))
+
+  (use-package company-auctex
+   :defer t
+   :after (auctex)
+   :init (company-auctex-init))
+#+end_src
+
+#+RESULTS:
+
+
+* Bibliography Management
+
+We expect the main BibTeX library to be available from
+~~/references/references.bib~. On new machines, a link must be created.
+  
+#+begin_src emacs-lisp
+  (require 'bibtex)
+  (defvar fchauvel/bibtex-library "~/references/references.bib")
+  (defvar fchauvel/pdf-library "~/references/pdf/")
+#+end_src
+
+#+RESULTS:
+: fchauvel/pdf-library
+
+Set some preference on how BibTeX generates keys and manage entries.
+
+#+begin_src emacs-lisp
+  (setq bibtex-autokey-year-length 4
+        bibtex-maintain-sorted-entries t)
+#+end_src
+
+  
+We use RefTeX to handle bibliography references.
+  
+#+begin_src emacs-lisp
+  (use-package reftex
+    :defer t
+    :config
+    (setq reftex-default-bibliography fchauvel/bibtex-library)
+    :commands turn-on-reftex
+    :hook ((LaTeX-mode  .  reftex-mode)
+           (latex-mode  .  reftex-mode)))
+#+end_src
+
+#+RESULTS:
+| reftex-mode |
+
+
+With Company to get the right auto-completion.
+
+#+begin_src emacs-lisp
+  (use-package company-reftex
+    :defer t
+    :after (company)
+    :init
+    (setq company-bibtex-bibliography fchauvel/bibtex-library)
+    :config
+    (add-to-list 'company-backends 'company-reftex))
+
+  (use-package company-bibtex
+    :defer t
+    :after (company)
+    :config
+    (add-to-list 'company-backends 'company-bibtex))
+#+end_src
+
+#+RESULTS:
+
+
+# #+begin_src emacs-lisp
+
+#   (use-package tex-site
+#     :ensure auctex
+#     :defer t
+#     :mode ("\\.tex\\'" . LaTeX-mode))
+
+
+
+
+#   (use-package math-symbol-lists
+#     :ensure t
+#     :defer t)
+
+#   (use-package company-math
+#     :defer t
+#     :config
+#     (add-to-list 'company-backends 'company-math-symbols-unicode)
+#     (add-to-list 'company-backends 'company-math-symbols-latex))
+
+
+
+
+
+#   (use-package company-auctex
+#     :defer t
+#     :init (company-auctex-init))          ;
+# #+end_src

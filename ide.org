@@ -319,6 +319,15 @@ languages, using language server protocols (LSP).
     #+end_src
 
 
+    
+** Rust
+
+#+begin_src elisp
+(use-package rust-mode)
+#+end_src
+
+#+RESULTS:
+
 * Version Control Systems
 
 ** Git

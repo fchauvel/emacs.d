@@ -1,0 +1,15 @@
+#+title: Configuration Basics
+
+
+* See Free Bindings
+
+~M-x free-keys~ enables listing the free bindings for the current
+buffer.
+
+#+begin_src elisp
+  (use-package free-keys
+    :ensure t)
+#+end_src
+
+#+RESULTS:
+
