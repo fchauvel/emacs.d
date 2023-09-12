@@ -10,9 +10,13 @@
 (unless package-archive-contents
  (package-initialize)
  (package-refresh-contents))
-(unless (package-installed-p 'use-package)
- (package-install 'use-package))
-(setq use-package-always-ensure t)
+
+;; Now shipped with Emacs 29.1
+;;(unless (package-installed-p 'use-package)
+;;  (package-install 'use-package))
+
+(setq use-package-always-ensure t
+      package-install-upgrade-built-in t)
 
 ;; Update packages automatically
 (use-package auto-package-update
@@ -66,85 +70,17 @@
 ;; Basic Configuration
 (org-babel-load-file "~/.emacs.d/basics.org")
 
-;; Look & Feel
+;; Look & Feelx
 (org-babel-load-file "~/.emacs.d/theme.org")
 
 ;; Navigation & Shortcuts
 (org-babel-load-file "~/.emacs.d/navigation.org")
 
-;; LaTeX
-(org-babel-load-file "~/.emacs.d/text.org")
-
-;; Org-Mode
-(org-babel-load-file "~/.emacs.d/org.org")
-
-;; Common settings for programming
+;; Programming
 (org-babel-load-file "~/.emacs.d/ide.org")
 
-;; Git
-;; Lisp / Scheme
-;;(load-file "~/.emacs.d/scheme.el")
-
-
-
-;; Python
-(load-file "~/.emacs.d/python.el")
-
-;; Dart & Flutter
-;;(load-file "~/.emacs.d/flutter.el")
-
-;; Weh / HTML
-;;(load-file "~/.emacs.d/web.el")
-
-;; JavaScript
-;;(load-file "~/.emacs.d/js.el")
-
-;; Typescript
-;;(load-file "~/.emacs.d/typescript.el")
-
-;; R
-
-;; Fuzzy Matching
-(use-package helm
-  :demand t
-  :bind ("M-x" . helm-M-x)
-  :config (helm-mode 1))
-
-
-;; YAML
-(use-package yaml-mode
- :ensure t
- :defer t
- :mode ("\\.yml$" . yaml-mode))
-
-
-;; Markdown
-(use-package markdown-mode
- :mode (("\\.markdown$" . markdown-mode)
-        ("\\.md$" . markdown-mode))
- :hook (markdown-mode-hook . (lambda ()
-                               (make-local-variable 'indent-tabs-mode)
-                               (setq indent-tabs-mode nil)
-                               (whitespace-mode)))
- :init (setq markdown-command "multimarkdown"))
-
-
-;; Dockerfile
-(use-package dockerfile-mode
- :ensure t
- :defer t)
-
-
-;; Flyspell
-(use-package flyspell
- :ensure t
- :defer t
- :init (setq ispell-program-name "/opt/homebrew/bin/ispell")
- :hook
- (text-mode . turn-on-flyspell)
- (tex-mode . turn-on-flyspell)
- (prog-mode . flyspell-prog-mode))
-
+;; Text editors & Wikis
+(org-babel-load-file "~/.emacs.d/text.org")
 
 ;; Load specific windows configuration if needed
 (if (eq system-type 'windows-nt)

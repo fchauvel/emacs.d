@@ -9,7 +9,14 @@
     (global-set-key (kbd "M-x") #'helm-M-x)
     (global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
     (global-set-key (kbd "C-x C-f") #'helm-find-files)
+    (global-set-key (kbd "C-x b") #'helm-buffers-list)
   #+end_src
+
+  #+RESULTS:
+  : helm-buffers-list
+
+  When using ~helm-find-files~ One can use ~C-c C-u~ to refresh the
+  file list. Newly created files may be missing.
 
   #+RESULTS:
   : helm-find-files
@@ -128,6 +135,19 @@ Use [[https://github.com/joodland/bm][Visual Bookmarks]]
 
   
 * Disk/File Search
+
+** Directory Navigation with Direx
+
+See [[https://github.com/emacsorphanage/direx/tree/935d2010234c02c93e22d6e1cc72d595341ba855][Direx Github]]
+
+#+begin_src elisp
+    (use-package direx
+      :bind (
+             ("C-x C-j" . #'direx:jump-to-directory-other-window)))
+#+end_src
+
+#+RESULTS:
+: direx:jump-to-directory-other-window
 
 ** Grep
 
