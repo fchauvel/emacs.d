@@ -5,24 +5,34 @@ languages, using language server protocols (LSP).
 
 * Programming Text Editor
 
-  Basic configurations:
+Basic configurations:
   * Disable tabulations
   * Activate column number mode
-  * Show lines numbers straight into the editor
     
   #+begin_src emacs-lisp
     (setq-default indent-tabs-mode nil)
     (setq-default column-number-mode t)
-
-    (use-package nlinum
-      :hook ((prog-mode . nlinum-mode)))
   #+end_src
+
+** Line Numbers Shown in the Margin
+  
+  Display the line number on the margin, (on top of the none that
+  appears in the mod-line:
+
+  #+begin_src elisp
+    (global-display-line-numbers-mode)
+  #+end_src
+
+  #+RESULTS:
+  : t
+
+** Highlight TODO, FIXME, etc.  
 
   We also use the [[https://github.com/tarsius/hl-todo/tree/6769accd7003ba5a0376d2c5cef0fcffce8f45be][~hl-todo~ package]] to highlight TODO, FIXME and other
   markers in comments
 
   #+begin_src emacs-lisp
-        (use-package hl-todo
+       (use-package hl-todo
           :hook ((prog-mode . hl-todo-mode))
           :bind
           (("C-c t n" . hl-todo-next)
