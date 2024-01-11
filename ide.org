@@ -392,6 +392,27 @@ We can use The origami package to fold code
   #+end_src
   
 
+* Terminal Emulation
+
+I use [[https://github.com/akermu/emacs-libvterm/tree/e96c53f5035c841b20937b65142498bd8e161a40][vterm]], which requires libvterm to be available and Emacs to be
+compiled with module support. The installation of the ~vterm~ Emacs
+package triggers compilation task that requires "build" tools to be
+available on the machine.
+
+#+begin_src bash
+    sudo apt-get update
+    sudo apt-get install build-essential cmake libtool libvterm0 libvterm-dev
+#+end_src
+
+#+begin_src elisp
+  (use-package vterm
+    :ensure t
+    :config
+    ;; Compile the vterm module if it's not already compiled
+    (unless (file-exists-p (concat user-emacs-directory "vterm-module.so"))
+      (vterm-module-compile)))
+#+end_src
+  
 * Docker
 
 Super for Dockerfile
