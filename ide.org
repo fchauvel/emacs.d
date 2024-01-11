@@ -327,6 +327,21 @@ We rely on EGlot, shipped with Emacs 29
 #+end_src
 
 
+* Code Folding with Origami
+
+We can use The origami package to fold code
+
+#+begin_src elisp
+  (use-package origami
+    :ensure t
+    :hook (python-mode . origami-mode))
+  #+end_src
+
+  #+RESULTS:
+  | origami-mode | blacken-mode |
+
+#+end_src 
+
 * Syntax Highlighting with Tree-sitter
 
 #+begin_src elisp
