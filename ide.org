@@ -149,43 +149,8 @@ languages, using language server protocols (LSP).
        :after (lsp-mode treemacs)
        :commands lsp-treemacs-errors-list)
    #+end_src
-
-
-** Projectile
-
-   [[https://docs.projectile.mx/projectile/index.html][Projectile]] provides various search feature within a project (Git, Maven,
-   etc.). Especially finding file recursively.
    
-   #+begin_src emacs-lisp
-     (use-package projectile
-       :ensure t
-       :init
-       (projectile-mode +1)
-       :bind (:map projectile-mode-map
-                   ("s-p" . projectile-command-map)
-                   ("C-c p" . projectile-command-map)))
-   #+end_src
 
-   We also install the integration with helm, which provides ~grep~
-   through the whole project, using the command
-   ~helm-projectile-grep~.
-
-   #+begin_src emacs-lisp
-     (use-package helm-projectile
-       :after (helm projectile)
-       :init
-       (setq projectile-completion-system 'helm)
-       :config
-       (require 'helm-projectile)
-       :bind (
-              ("C-c p h" . helm-projectile)
-              )
-       :hook
-       (after-init . helm-projectile-on))
-   #+end_src
-
-
-   
 * Programming Languages
 
 ** Code Completion
