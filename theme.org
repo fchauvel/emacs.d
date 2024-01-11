@@ -21,12 +21,18 @@
 
 * Emacs Theme
 
-  We use [[http://www.proggyfonts.net/][Proggy Fonts]] as the default font.
+** Proggy Fonts
+
+  We use [[http://www.proggyfonts.net/][Proggy Fonts]] as the default font. See the [[https://github.com/bluescan/proggyfonts][GitHub repository]].
+  
 
   #+begin_src emacs-lisp
     (add-to-list 'default-frame-alist
                  '(font . "ProggyVector"))
+    (set-face-attribute 'default nil :height 95)
   #+end_src  
+
+  #+RESULTS:
 
 
   We use a more "powerful" mode-line.
