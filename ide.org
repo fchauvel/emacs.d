@@ -198,8 +198,11 @@ We rely on EGlot, shipped with Emacs 29
                  `(java-mode ,(expand-file-name "Tools/jdtls/v1.9.0/bin/jdtls" "/Users/fchauvel")
                              "-configuration" ,(expand-file-name "Tools/jdlts/v1.9.0/config_mac" "/Users/fchauvel")
                              "-data" ,(expand-file-name "cache/jdtls/workspace" user-emacs-directory)))
+    (add-to-list 'eglot-server-programs '(python-ts-mode . ("pyright-langserver" "--stdio")))
+
     :hook
-    (java-mode . eglot-ensure))
+    ((java-mode . eglot-ensure)
+     (python-ts-mode . eglot-ensure)))
 #+end_src
 
 #+RESULTS:
