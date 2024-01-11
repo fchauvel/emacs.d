@@ -348,13 +348,17 @@ We can use The origami package to fold code
 #+begin_src elisp
   (use-package origami
     :ensure t
-    :hook (python-mode . origami-mode))
+    :hook
+    (prog-mode . origami-mode)
+    :config
+    (define-key origami-mode-map (kbd "C-c o f") 'origami-toggle-node))
   #+end_src
 
   #+RESULTS:
-  | origami-mode | blacken-mode |
+  | origami-mode | flyspell-prog-mode | rainbow-mode | rainbow-delimiters-mode | whitespace-mode | hl-todo-mode |
 
 #+end_src 
+
 
 * Syntax Highlighting with Tree-sitter
 
