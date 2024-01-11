@@ -14,17 +14,19 @@
 
 ** Spell-Checking
 
+On Linux, one can install ispell using ~apt-get install ispell~.
+
 #+begin_src elisp
   (use-package flyspell
     :ensure t
     :defer t
-   :init (setq ispell-program-name "/opt/homebrew/bin/ispell")
+   :init (setq ispell-program-name "/usr/bin/ispell")
    :hook
    (text-mode . turn-on-flyspell)
    (tex-mode . turn-on-flyspell)
    (prog-mode . flyspell-prog-mode))
 #+end_src
-ojs
+
 
 * Markdown
 
@@ -262,7 +264,7 @@ With Company to get the right auto-completion.
 
 ** Org-roam
 
-I use it to take notes about various things:
+See use it to take notes about various things:
 
 See the defintion of ~fchauvel/notes-library~ at the top of this
 file.
