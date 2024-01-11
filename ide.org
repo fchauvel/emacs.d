@@ -289,6 +289,17 @@ We rely on EGlot, shipped with Emacs 29
                 flycheck-idle-change-delay 4))
 #+end_src 
 
+Use [[https://github.com/pythonic-emacs/blacken][blacken]] to pretty print Python code on save. Note that black must
+be globally available for that to work, running ~pip install black~-
+
+#+begin_src elisp
+  (use-package blacken
+    :ensure t
+    :hook (python-mode . blacken-mode))
+#+end_src
+
+#+RESULTS:
+| blacken-mode |
     
 ** R
 
