@@ -25,8 +25,7 @@
 
   We use [[http://www.proggyfonts.net/][Proggy Fonts]] as the default font. See the [[https://github.com/bluescan/proggyfonts][GitHub repository]].
   
-
-  #+begin_src emacs-lisp
+  #+begin_src elisp
     (add-to-list 'default-frame-alist
                  '(font . "ProggyVector"))
     (set-face-attribute 'default nil :height 95)
@@ -53,7 +52,13 @@
       :ensure t
       :init (progn
               (setq nord-comment-brightness 15)
-              (load-theme 'nord t)))
+              (load-theme 'nord t))
+      :config
+      (progn
+        (set-face-foreground 'whitespace-line "#4C566A")))
   #+end_src
+
+  #+RESULTS:
+  : t
 
   
