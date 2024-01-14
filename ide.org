@@ -412,12 +412,21 @@ Specific language grammars have to be installed, see [[https://www.masteringemac
        (unless (file-exists-p "~/.ssh/id_rsa.pub")
          (remove-hook 'magit-credential-hook 'ssh-agency-ensure))
        (setenv "SSH_ASKPASS" "git-gui--askpass"))
+
      ;; Magit
      (use-package magit
        :defer t)
-
    #+end_src
 
+   We also install ~git gutter~ to see which lines have been modified
+   in the buffers.
+
+   #+begin_src elisp
+     (use-package git-gutter
+       :ensure t
+       :config
+       (global-git-gutter-mode +1))
+   #+end_src
 
 * REST Client
 
