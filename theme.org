@@ -28,7 +28,6 @@
   #+begin_src elisp
     (add-to-list 'default-frame-alist
                  '(font . "ProggyVector"))
-    (set-face-attribute 'default nil :height 95)
   #+end_src  
 
   #+RESULTS:
@@ -55,6 +54,7 @@
               (load-theme 'nord t))
       :config
       (progn
+        (set-face-attribute 'default nil :height 95)
         (set-face-foreground 'whitespace-line "#4C566A")))
   #+end_src
 
