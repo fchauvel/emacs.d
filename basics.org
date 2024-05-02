@@ -1,14 +1,22 @@
 #+title: Configuration Basics
 
 
-* See Free Bindings
-
-~M-x free-keys~ enables listing the free bindings for the current
-buffer.
+* Scratchpad
 
 #+begin_src elisp
-  (use-package free-keys
-    :ensure t)
+  (with-current-buffer "*scratch*"
+      (org-mode)  
+      (setq buffer-read-only nil))
+#+end_src
+
+#+RESULTS:
+
+* Free keys
+
+Show the key bindings that are available for use
+
+#+begin_src elisp
+  (use-package free-keys)
 #+end_src
 
 #+RESULTS:

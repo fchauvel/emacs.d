@@ -135,26 +135,11 @@ Use [[https://github.com/joodland/bm][Visual Bookmarks]]
       (setq helm-swoop-use-fuzzy-match t))
   #+end_src
 
+  #+RESULTS:
+  : helm-multi-swoop
+
   
 * Disk/File Search
-
-** Directory Navigation with Direx
-
-See [[https://github.com/emacsorphanage/direx/tree/935d2010234c02c93e22d6e1cc72d595341ba855][Direx Github]]
-
-#+begin_src elisp
-    (use-package direx
-      :bind (
-             ("C-x C-j" . #'direx:jump-to-directory-other-window)))
-#+end_src
-
-#+RESULTS:
-: direx:jump-to-directory-other-window
-
-** Grep
-
-One can use regular grep command, available through ~M-x grep~
-
 
 ** AG & Helm-AG
 

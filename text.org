@@ -12,6 +12,26 @@
 #+RESULTS:
 : titlecase-line
 
+** Rectangle Selection
+
+#+begin_src elisp
+  (defun rectangle-yank-flatten (START END SEPARATOR)
+    "Copy a rectangle of text from START to END and paste it as a
+  single line distinguished by the given SEPARATOR."
+    (interactive "r\nsSeparator: ")
+    (letrec ((lines (extract-rectangle START END))
+             (flatten (cl-reduce
+                       (lambda (acc line) (concat acc SEPARATOR line))
+                       lines)))
+      (kill-new flatten)
+      (deactivate-mark)))
+
+  (global-set-key (kbd "C-x r C-f") 'rectangle-yank-flatten)
+#+end_src
+
+#+RESULTS:
+: rectangle-yank-flatten
+
 ** Spell-Checking
 
 On Linux, one can install ispell using ~apt-get install ispell~.

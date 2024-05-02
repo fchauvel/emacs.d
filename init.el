@@ -41,8 +41,8 @@
 (setq backup-directory-alist `(("." . ,my/emacs-backup-directory)))
 
 
-;; Restore the open buffers on restart
-
+;; Save/restore various thing in between sessions, such as registers,
+;; buffer list, etc.
 (defvar franck/desktop-directory "~/.emacs.d/desktop",
   "Hold the directory where Emacs saves the current session's buffers.")
 
