@@ -21,13 +21,14 @@
 
 * Emacs Theme
 
-** Proggy Fonts
+** Fonts 
 
   We use [[http://www.proggyfonts.net/][Proggy Fonts]] as the default font. See the [[https://github.com/bluescan/proggyfonts][GitHub repository]].
   
   #+begin_src elisp
-    (add-to-list 'default-frame-alist
-                 '(font . "ProggyVector"))
+    (custom-set-variables
+     '(face-font-family-alist '(default "ProggyVector" nil))
+     '(face-font-size-adjust-alist '(default 100 nil)))
   #+end_src  
 
   #+RESULTS:
@@ -39,10 +40,15 @@
     (use-package smart-mode-line-powerline-theme)
 
     (use-package smart-mode-line
-      :config
+      :init
       (setq sml/theme 'powerline)
-      (add-hook 'after-init-hook 'sml/setup))
+      (setq sml/no-confirm-load-theme t)
+      :config
+      (sml/setup))
   #+end_src
+
+  #+RESULTS:
+  : t
   
   We use the [[https://www.nordtheme.com/][Nord theme]] overall.
   
@@ -51,11 +57,7 @@
       :ensure t
       :init (progn
               (setq nord-comment-brightness 15)
-              (load-theme 'nord t))
-      :config
-      (progn
-        (set-face-attribute 'default nil :height 95)
-        (set-face-foreground 'whitespace-line "#4C566A")))
+              (load-theme 'nord t)))
   #+end_src
 
   #+RESULTS:

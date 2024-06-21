@@ -145,37 +145,6 @@ With Company to get the right auto-completion.
     (add-to-list 'company-backends 'company-bibtex))
 #+end_src
 
-#+RESULTS:
-
-
-# #+begin_src emacs-lisp
-
-#   (use-package tex-site
-#     :ensure auctex
-#     :defer t
-#     :mode ("\\.tex\\'" . LaTeX-mode))
-
-
-
-
-#   (use-package math-symbol-lists
-#     :ensure t
-#     :defer t)
-
-#   (use-package company-math
-#     :defer t
-#     :config
-#     (add-to-list 'company-backends 'company-math-symbols-unicode)
-#     (add-to-list 'company-backends 'company-math-symbols-latex))
-
-
-
-
-
-#   (use-package company-auctex
-#     :defer t
-#     :init (company-auctex-init))          ;
-# #+end_src
 
 * Org-mode
 
@@ -204,7 +173,6 @@ With Company to get the right auto-completion.
         (shell . t)
         (screen . t)
         (scheme . t)
-        (typescript . t)
         (sql . t)
         (js . t)
         (java . t)

@@ -329,9 +329,11 @@ be globally available for that to work, running ~pip install black~-
 Formatting SQL block in Org-mode especially.
 
 #+begin_src elisp
-    (use-package "sqlformat"
-      :ensure t
-      :config (setq sqlformat-args '("-k" "upper"))) ;; Upper-case key-words
+  (use-package "sqlformat"
+    :ensure t
+    :config (setq
+             sqlformat-command 'pgformatter
+             sqlformat-args '("-s2" "-B")))
 #+end_src
 
 #+RESULTS:
@@ -486,6 +488,22 @@ sudo apt-get update
     (unless (file-exists-p (concat user-emacs-directory "vterm-module.so"))
       (vterm-module-compile)))
 #+end_src
+
+** Directory tracking
+
+To enable directory tracking, that is the ability to open files from
+the directory where the terminal is currently at, you need to add the
+following script in your shell configuration (say, ~.bashrc~)
+
+#+begin_src bash
+if [[ "$INSIDE_EMACS" = 'vterm' ]] \
+    && [[ -n ${EMACS_VTERM_PATH} ]] \
+    && [[ -f ${EMACS_VTERM_PATH}/etc/emacs-vterm-bash.sh ]]; then
+        source ${EMACS_VTERM_PATH}/etc/emacs-vterm-bash.sh
+fi
+#+end_src
+
+See the documentation on at [[https://github.com/akermu/emacs-libvterm?tab=readme-ov-file#shell-side-configuration-files][emacs-vterm (on Github)]]
 
 #+RESULTS:
 : t
