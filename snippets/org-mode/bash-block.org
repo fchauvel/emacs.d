@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Bash shell code block
+# key: bash
+# condition: (eq major-mode 'org-mode)
+# --
+#+begin_src bash
+
+#+end_src

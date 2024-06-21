@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: license header
+# key: license
+# --
+#
+# This file is part ${1:project}
+# Copyright (C) ${2:2023}, ${3: Company}
+#
+# All rights reserved
+#
