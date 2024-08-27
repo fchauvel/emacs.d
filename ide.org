@@ -326,7 +326,7 @@ be globally available for that to work, running ~pip install black~-
 
 ** SQL
 
-Formatting SQL block in Org-mode especially.
+Formatting SQL block in Org-mode especially. We use [[https://github.com/darold/pgFormatter][pgformatter]]
 
 #+begin_src elisp
   (use-package "sqlformat"
@@ -508,6 +508,7 @@ See the documentation on at [[https://github.com/akermu/emacs-libvterm?tab=readm
 #+RESULTS:
 : t
   
+
 * Docker
 
 Super for Dockerfile

@@ -21,3 +21,11 @@ Show the key bindings that are available for use
 
 #+RESULTS:
 
+* Custom Shortcuts
+
+#+begin_src elisp
+  (global-set-key (kbd "C-c d") 'delete-region)
+#+end_src
+
+#+RESULTS:
+: delete-region
