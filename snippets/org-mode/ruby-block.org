@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: ruby code block
-# key: ruby
+# key: #ruby
+# expand-env: ((yas-indent-line 'fixed))
 # --
 #+header: :results output
 #+begin_src ruby

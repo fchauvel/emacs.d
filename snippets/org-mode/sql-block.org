@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: SQL code block
-# key: sql
+# key: #sql
 # condition: (eq major-mode 'org-mode)
 # --
 #+begin_src sql

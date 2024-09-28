@@ -167,17 +167,19 @@ With Company to get the right auto-completion.
       'org-babel-load-languages
       '((python . t)
         (C . t)
+        (ditaa . t)
         (dot . t)
+        (java . t)
+        (js . t)
         (R . t)
+        (restclient . t)
         (ruby . t)
         (shell . t)
         (screen . t)
         (scheme . t)
         (sql . t)
-        (js . t)
-        (java . t)
-        (ditaa . t)
-        (restclient . t)))
+        (typescript . t)
+     ))
    #+end_src
 
    #+RESULTS:
@@ -188,12 +190,13 @@ With Company to get the right auto-completion.
   (use-package ob-typescript
     :ensure t
     :config
-    (setq org-babel-command:typescript "tsc"))
+    (setq org-babel-command:typescript "tsx"))
 #+end_src
 
 #+RESULTS:
 : t
-   
+
+
 *** R
 
     #+begin_src emacs-lisp
