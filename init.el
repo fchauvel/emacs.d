@@ -67,12 +67,12 @@
 
 ;; Avoid splitting the windows horizontally
 (setq split-height-threshold 4000
-      split-width-threshold 100)
+     split-width-threshold 100)
 
 ;; Basic Configuration
 (org-babel-load-file "~/.emacs.d/basics.org")
 
-;; Look & Feelx
+;; Look & Feel
 (org-babel-load-file "~/.emacs.d/theme.org")
 
 ;; Navigation & Shortcuts
@@ -81,7 +81,7 @@
 ;; Programming
 (org-babel-load-file "~/.emacs.d/ide.org")
 
-;; Text editors & Wikis
+;; ;; Text editors & Wikis
 (org-babel-load-file "~/.emacs.d/text.org")
 
 ;; Load specific windows configuration if needed
@@ -100,4 +100,4 @@
                              (float-time
                               (time-subtract after-init-time before-init-time)))
                      gcs-done)))
-(put 'downcase-region 'disabled nil)
+(put 'magit-clean 'disabled nil)

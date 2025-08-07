@@ -33,18 +33,30 @@
 
   #+RESULTS:
 
+This is meant to set the font-size globally. The value is in 1/10 pt,
+so 100 gives 10 pt. 
 
-  We use a more "powerful" mode-line.
-  
-  #+begin_src emacs-lisp
-    (use-package smart-mode-line-powerline-theme)
+Alternatively, one could also use ~(set-frame-font "ProggyVector" 12)~
 
-    (use-package smart-mode-line
-      :init
-      (setq sml/theme 'powerline)
-      (setq sml/no-confirm-load-theme t)
-      :config
-      (sml/setup))
+#+begin_src elisp
+  (set-face-attribute 'default nil :height 95)
+#+end_src
+
+#+RESULTS:
+
+
+
+We use a more "powerful" mode-line.
+
+#+begin_src emacs-lisp
+  (use-package smart-mode-line-powerline-theme)
+
+  (use-package smart-mode-line
+    :init
+    (setq sml/theme 'powerline)
+    (setq sml/no-confirm-load-theme t)
+    :config
+    (sml/setup))
   #+end_src
 
   #+RESULTS:
@@ -62,5 +74,3 @@
 
   #+RESULTS:
   : t
-
-  

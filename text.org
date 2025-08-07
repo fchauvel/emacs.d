@@ -167,16 +167,17 @@ With Company to get the right auto-completion.
       'org-babel-load-languages
       '((python . t)
         (C . t)
+        (R . t)
         (ditaa . t)
         (dot . t)
+        (http . t)
         (java . t)
         (js . t)
-        (R . t)
         (restclient . t)
         (ruby . t)
-        (shell . t)
-        (screen . t)
         (scheme . t)
+        (screen . t)
+        (shell . t)
         (sql . t)
         (typescript . t)
      ))
@@ -200,10 +201,10 @@ With Company to get the right auto-completion.
 *** R
 
     #+begin_src emacs-lisp
-      (setq org-babel-R-command "/Library/Frameworks/R.framework/Resources/R --slave --no-save")
+      (setq org-babel-R-command "/usr/bin/R --slave --no-save")
     #+end_src
     #+RESULTS:
-    : /Library/Frameworks/R.framework/Resources/R --slave --no-save
+    : /usr/bin/R --slave --no-save
    
 *** Ditaa
 
